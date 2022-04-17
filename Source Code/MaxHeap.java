@@ -36,6 +36,40 @@ public final class MaxHeap<T extends Comparable<? super T>>
       integrityOK = true;
    } // end constructor
 
+   // Section 27.16 (max heap constructor)
+   public MaxHeap(T[] entries)
+   {
+      this(entries.length); // Call other constructor
+      lastIndex = entries.length;
+      // Assertion: integrityOK = true
+
+      // Copy given array to data field
+      for (int index = 0; index < entries.length; index++)
+         heap[index + 1] = entries[index];
+
+      // Create heap
+      for (int rootIndex = lastIndex / 2; rootIndex > 0; rootIndex--)
+         reheap(rootIndex);
+   } // end constructor
+
+   // Section 27.20 (heap sort method)
+   public static <T extends Comparable<? super T>>
+       void heapSort(T[] array, int n)
+   {
+      // Create first heap
+      for (int rootIndex = n / 2 - 1; rootIndex >= 0; rootIndex--)
+         reheap(array, rootIndex, n - 1);
+
+      swap(array, 0, n - 1);
+
+      for (int lastIndex = n - 2; lastIndex > 0; lastIndex--)
+      {
+         reheap(array, 0, lastIndex);
+         swap(array, 0, lastIndex);
+      } // end for
+   } // end heapSort
+
+   // Section 27.8 (add method) (See Segment 27.8 - original)
    public void add(T newEntry)
    {
       checkIntegrity();        // Ensure initialization of data fields
@@ -53,6 +87,7 @@ public final class MaxHeap<T extends Comparable<? super T>>
       ensureCapacity();
    } // end add
 
+   // Section 27.12 (removeMax method/ remove method of a max-heap) (See Segment 27.12 - original)
    public T removeMax()
    {
       checkIntegrity();             // Ensure initialization of data fields
@@ -99,6 +134,71 @@ public final class MaxHeap<T extends Comparable<? super T>>
       lastIndex = 0;
    } // end clear
    
-// Private methods
+   // Private methods
+
+   // Section 27.11 (reheap with precondition)
+   // Precondition: checkIntegrity has been called.
+   private void reheap(int rootIndex)
+   {
+      boolean done = false;
+      T orphan = heap[rootIndex];
+      int leftChildIndex = 2 * rootIndex;
+
+      while (!done && (leftChildIndex <= lastIndex) )
+      {
+         int largerChildIndex = leftChildIndex; // Assume larger
+         int rightChildIndex = leftChildIndex + 1;
+
+         if ( (rightChildIndex <= lastIndex) &&
+               heap[rightChildIndex].compareTo(heap[largerChildIndex]) > 0)
+         {
+            largerChildIndex = rightChildIndex;
+         } // end if
+
+         if (orphan.compareTo(heap[largerChildIndex]) < 0)
+         {
+            heap[rootIndex] = heap[largerChildIndex];
+            rootIndex = largerChildIndex;
+            leftChildIndex = 2 * rootIndex;
+         }
+         else
+            done = true;
+      } // end while
+
+      heap[rootIndex] = orphan;
+   } // end reheap
+
+   // Section 27.19 (reheap method with 3 input fields)
+   private static <T extends Comparable<? super T>>
+        void reheap(T[] heap, int rootIndex, int lastIndex)
+   {
+      boolean done = false;
+      T orphan = heap[rootIndex];
+      int leftChildIndex = 2 * rootIndex + 1;
+
+      while (!done && (leftChildIndex <= lastIndex))
+      {
+         int largerChildIndex = leftChildIndex;
+         int rightChildIndex = leftChildIndex + 1;
+
+         if ( (rightChildIndex <= lastIndex) &&
+               heap[rightChildIndex].compareTo(heap[largerChildIndex]) > 0)
+         {
+            largerChildIndex = rightChildIndex;
+         } // end if
+
+         if (orphan.compareTo(heap[largerChildIndex]) < 0)
+         {
+            heap[rootIndex] = heap[largerChildIndex];
+            rootIndex = largerChildIndex;
+            leftChildIndex = 2 * rootIndex + 1;
+         }
+         else
+            done = true;
+      } // end while
+
+      heap[rootIndex] = orphan;
+   } // end reheap
+
 // . . .
 } // end MaxHeap
