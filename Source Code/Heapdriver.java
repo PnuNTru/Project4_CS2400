@@ -9,9 +9,14 @@ public class Heapdriver
     System.out.println("=====================================================================");
     
     String fileName =  "data_sorted.txt";
-    generateHeap(filename);
+    generateHeap(fileName);
     
     fileName = "data_random.txt"
-    
+    generateHeap(fileName):
+  }
+  
+  static void generateHeap(String fileName) throws FileNotFoundException
+  {
+    System.out.println("\nFile name: " + fileName);
   }
 }
