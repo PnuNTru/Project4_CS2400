@@ -12,8 +12,10 @@ public final class MaxHeap<T extends Comparable<? super T>>
    private T[] heap;      // Array of heap entries; ignore heap[0]
    private int lastIndex; // Index of last entry and number of entries
    private boolean integrityOK = false;
-	private static final int DEFAULT_CAPACITY = 25;
-	private static final int MAX_CAPACITY = 10000;
+   private static final int DEFAULT_CAPACITY = 25;
+   private static final int MAX_CAPACITY = 10000;
+   
+   private int swapCounter = 0;
    
    public MaxHeap()
    {
@@ -24,9 +26,9 @@ public final class MaxHeap<T extends Comparable<? super T>>
    {
       // Is initialCapacity too small?
       if (initialCapacity < DEFAULT_CAPACITY)
-         initialCapacity = DEFAULT_CAPACITY;
+          initialCapacity = DEFAULT_CAPACITY;
       else // Is initialCapacity too big?
-         checkCapacity(initialCapacity);
+          checkCapacity(initialCapacity);
       
       // The cast is safe because the new array contains null entries
       @SuppressWarnings("unchecked")
