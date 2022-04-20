@@ -5,7 +5,7 @@ Names: Jonathan Pena , Phu Truong
 
 Contributions:
 
-Jonathan Pena: Heapdriver.java and helped debug
+Jonathan Pena: Heapdriver.java and helped debug parts of MaxHeap.java
 
 Phu Truong:
 
