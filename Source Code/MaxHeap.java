@@ -214,7 +214,7 @@ public final class MaxHeap<T extends Comparable<? super T>>
          checkCapacity(lastIndex);
          heap = Arrays.copyOf(heap, newLength);
       }
-   }
+   } // end ensureCapacity
 
    private void checkIntegrity()
    {
