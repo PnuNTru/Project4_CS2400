@@ -9,8 +9,4 @@ Jonathan Pena: Heapddriver.java and helped debug
 
 Phu Truong:
 
-Screencast Link:
-
-Javadoc Link:
-
-Extra Features:
+Extra Features: Interface and generic functionality.
