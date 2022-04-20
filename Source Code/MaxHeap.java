@@ -69,6 +69,12 @@ public final class MaxHeap<T extends Comparable<? super T>>
       } // end for
    } // end heapSort
 
+   private static final <T> void swap(T[]array, int i, int j) {
+      T temp = array[i];
+      array[i] = array[j];
+      array[j] = temp; 
+   } // end swap
+
    // Section 27.8 (add method) (See Segment 27.8 - original)
    public void add(T newEntry)
    {
@@ -199,6 +205,32 @@ public final class MaxHeap<T extends Comparable<? super T>>
 
       heap[rootIndex] = orphan;
    } // end reheap
+
+   private void ensureCapacity()
+   {
+      if(lastIndex >= heap.length - 1)
+      {
+         int newLength = 2 * heap.length;
+         checkCapacity(lastIndex);
+         heap = Arrays.copyOf(heap, newLength);
+      }
+   }
+
+   private void checkIntegrity()
+   {
+      if(!integrityOK)
+      {
+         throw new SecurityException("ArrayList Object is corrupt.");
+      }
+   } // end checkIntegrity
+
+   private void checkCapacity(int initialCapacity)
+   {
+      if(initialCapacity > MAX_CAPACITY)
+      {
+         throw new ArrayIndexOutOfBoundsException("Array capacity has exceeded maximum capacity.");
+      }
+   } // end checkCapacity
 
 // . . .
 } // end MaxHeap
