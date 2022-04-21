@@ -7,6 +7,6 @@ Contributions:
 
 Jonathan Pena: Heapdriver.java and helped debug parts of MaxHeap.java
 
-Phu Truong:
+Phu Truong: MaxHeap.java
 
 Extra Features: used  a Java interface and generic data types.
